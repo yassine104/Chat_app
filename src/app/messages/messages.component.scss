@@ -1,0 +1,126 @@
+.chatbot-container {
+    width: 450px;
+    height: 600px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.chatbot-header {
+    background-color: #ff2600;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.chatbot-messages {
+    height: 500px;
+    overflow-y: scroll;
+    padding: 10px;
+    display: flex; /* Add display flex */
+    flex-direction: column; 
+}
+
+.received {
+    position: relative; /* Set position to relative for the parent container */
+    background-color: #d8d1d1;
+    align-self: flex-start;
+    color: black;
+    text-align: left;
+    margin-left: 30px; /* Indent sent messages from the right */
+    border-top-right-radius: 5px; /* Round top-right corner */
+    border-bottom-right-radius: 5px; /* Round bottom-right corner */
+}
+
+
+.received .bolt-wrapper {
+    width: 28px; /* Adjust the size of the circle */
+    height: 28px; /* Adjust the size of the circle */
+    background-color: #f57900; /* White background for the circle */
+    border-radius: 50%; /* Make the circle shape */
+    display: flex;
+    position: absolute; /* Position the bolt icon absolutely */
+    font-size: 25px;
+    top: 10%; /* Position it vertically centered */
+    left: -35px; /* Adjust the position as needed */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensure the icon stays inside the circle */
+}
+
+.bolt-wrapper i {
+    color: white; /* Orange color for the bolt icon */
+}
+
+
+.message {
+    position: relative; /* Set position to relative for the message container */
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    max-width: 77%;
+}
+
+.sent {
+    background-color: #ff2600;
+    color: white;
+    align-self: flex-end;
+    margin-right: 30px; 
+    text-align: left;
+    border-top-right-radius: 5px; /* Round top-right corner */
+    border-bottom-right-radius: 5px; /* Round bottom-right corner */
+}
+.sent .user-wrapper {
+    width: 28px; /* Adjust the size of the circle */
+    height: 28px; /* Adjust the size of the circle */
+    background-color: #f57900; /* White background for the circle */
+    border-radius: 50%; /* Make the circle shape */
+    display: flex;
+    position: absolute; /* Position the bolt icon absolutely */
+    font-size: 25px;
+    top: 10%; /* Position it vertically centered */
+    right: -30px; /* Adjust the position as needed */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensure the icon stays inside the circle */
+}
+
+.bolt-wrapper i {
+    color: white; /* Orange color for the bolt icon */
+}
+
+
+.chatbot-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 325px;
+    
+}
+
+.chatbot-input button {
+    padding: 8px 15px;
+    background-color: #ff2600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chatbot-input button:hover {
+    background-color: #f74c2e;
+}

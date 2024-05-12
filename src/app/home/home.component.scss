@@ -1,0 +1,102 @@
+.home-container {
+    width: 450px;
+    height: 600px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.home-header {
+    width: 450px;
+    height: 300px;
+    background: linear-gradient(0deg, #ffffff, #ff2600);
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.bolt-wrapper {
+    width: 35px; /* Adjust the size of the circle */
+    height: 35px; /* Adjust the size of the circle */
+    background-color: white; /* White background for the circle */
+    border-radius: 50%; /* Make the circle shape */
+    display: flex;
+    position: absolute; /* Position the bolt icon absolutely */
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensure the icon stays inside the circle */
+    top: 45px; /* Position at the top */
+    left: 50%; /* Align at the center */
+    transform: translateX(-50%); /* Center horizontally */
+}
+
+.bolt-wrapper i {
+    color: #f57900; /* Orange color for the bolt icon */
+}
+
+.home-title1 {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 100px;
+    left: 25%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    -webkit-background-clip: text;
+    background-clip: text; /* Standard property */
+    -webkit-text-fill-color: transparent;
+}
+.home-title2 {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    top: 130px;
+    left: 38%;
+    transform: translateX(-50%);
+}
+
+
+
+.search-container {
+    position: relative;
+
+    input {
+        width: 450px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    ul.dropdown-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgb(226, 215, 215);
+        border: 1px solid white;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0px 2px 5px #f57900;
+    }
+
+    ul.dropdown-list li {
+        padding: 10px;
+        cursor: pointer;
+        color: black; /* Add this line to ensure the text is visible */
+
+        &:hover {
+            background-color: white; /* Change the color to ensure visibility */
+            border-color: #f57900;
+        }
+    }
+}
