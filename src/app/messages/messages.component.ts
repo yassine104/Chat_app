@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit, AfterViewInit {
+export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('chatContainer', { static: false }) chatContainer!: ElementRef;
 
@@ -17,13 +18,23 @@ export class MessagesComponent implements OnInit, AfterViewInit {
     { text: "Bonjour ! Comment puis-je vous aider aujourd'hui ?", type: 'received' }
   ];
 
-  constructor(private fb: FormBuilder) { }
+  messageSubscription: Subscription | undefined;
+
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.chatForm = this.fb.group({
       message: ['', Validators.required]
     });
   }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from the message subscription to avoid memory leaks
+    if (this.messageSubscription) {
+      this.messageSubscription.unsubscribe();
+    }
+  }
+
   ngAfterViewInit(): void {
     this.scrollToBottom();
   }
@@ -40,14 +51,35 @@ export class MessagesComponent implements OnInit, AfterViewInit {
       this.messages.push({ text: messageText, type: 'sent' });
       this.chatForm.reset();
       
-      // Simulating a received message (You can replace this with actual chatbot logic)
-      setTimeout(() => {
-        this.messages.push({ text: 'I got your message!', type: 'received' });
-        setTimeout(() => {
-          this.scrollToBottom();
-        }, 0); 
-      }, 1000);
+      // Send message to Flask backend
+      this.http.post<any>('http://127.0.0.1:5000/process_message', { message: messageText }).subscribe(
+        () => {
+          // Fetch messages after sending the message
+          this.fetchMessages();
+        },
+        (error) => {
+          console.error('Error occurred while sending message:', error);
+        }
+      );
     }
   }
 
+  fetchMessages(): void {
+    // Fetch messages from the backend
+    this.http.get<any>('http://127.0.0.1:5000/fetch_processed_messages').subscribe(
+      (response) => {
+        // Handle the response from the Flask backend
+        const receivedMessages = response.processed_messages; // Access 'processed_messages' key
+        this.messages.push({ text: receivedMessages, type: 'received' });
+        
+        setTimeout(() => {
+          this.scrollToBottom();
+        }, 0); 
+      },
+      (error) => {
+        console.error('Error occurred while fetching messages:', error);
+      }
+    );
+  }
 }
+
